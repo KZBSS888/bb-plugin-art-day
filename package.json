@@ -1,0 +1,57 @@
+{
+  "name": "bb-plugin-art-day",
+  "version": "0.1.0",
+  "type": "module",
+  "engines": {
+    "bb": ">=0.6.157",
+    "bbPluginSdk": ">=0.6.157"
+  },
+  "bb": {
+    "name": "Art Day",
+    "description": "Discover a museum painting chosen for your taste each day. Uses your configured BB agent and its usage limits; no separate logins or API keys.",
+    "branding": {
+      "icon": "./art-day.svg"
+    },
+    "server": "./server.ts",
+    "app": "./app.tsx",
+    "skills": [
+      "skills"
+    ]
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@get-bb/plugin-sdk": "0.6.157",
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.7.0"
+  },
+  "license": "MIT",
+  "description": "A personal museum painting every day in BB.",
+  "files": [
+    "server.ts",
+    "app.tsx",
+    "art-day.tsx",
+    "art-day.css",
+    "art-day.svg",
+    "fresh-art.mjs",
+    "scheduler.mjs",
+    "prompt.mjs",
+    "skills",
+    "README.md",
+    "SECURITY.md",
+    "PLUGIN_OVERVIEW.md",
+    "LICENSE",
+    "dist"
+  ],
+  "scripts": {
+    "test": "node --test *.test.mjs",
+    "typecheck": "tsc --noEmit",
+    "build": "bb plugin build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KZBSS888/bb-plugin-art-day.git"
+  }
+}
