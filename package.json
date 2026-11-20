@@ -8,9 +8,13 @@
   },
   "bb": {
     "name": "Art Day",
-    "description": "Discover a museum painting chosen for your taste each day. Uses your configured BB agent and its usage limits; no separate logins or API keys.",
+    "description": "Discover one museum painting every day and develop your taste in art. Explore short Russian stories, rate paintings and save favorites to guide future selections. Fresh research uses only Google Arts & Culture and Wikimedia Commons, with automatic selection from 09:00 Europe/Paris. Requires BB 0.6.157+, internet and your configured BB agent; its usage limits apply, with no separate login or API key.",
     "branding": {
-      "icon": "./art-day.svg"
+      "icon": "./art-day.svg",
+      "logo": {
+        "light": "./starry-night.png",
+        "dark": "./starry-night.png"
+      }
     },
     "server": "./server.ts",
     "app": "./app.tsx",
@@ -28,7 +32,7 @@
     "typescript": "^5.7.0"
   },
   "license": "MIT",
-  "description": "A personal museum painting every day in BB.",
+  "description": "A daily museum painting, a short story, and recommendations shaped by your taste.",
   "files": [
     "server.ts",
     "app.tsx",
@@ -43,7 +47,8 @@
     "SECURITY.md",
     "PLUGIN_OVERVIEW.md",
     "LICENSE",
-    "dist"
+    "dist",
+    "starry-night.png"
   ],
   "scripts": {
     "test": "node --test *.test.mjs",

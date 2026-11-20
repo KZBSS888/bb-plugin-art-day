@@ -51,3 +51,7 @@ Node 22.13+ supports the test suite's standard-library SQLite API.
 The SDK is a development dependency; BB supplies runtime SDK and React.
 See SECURITY.md for trust boundaries. See skills/art-day/SKILL.md for the
 bounded daily research workflow. No install or postinstall scripts are used.
+
+A selection attempt is limited to 20 minutes. A timed-out worker must be confirmed stopped before an immediate retry; the three-attempt daily limit still applies. If stopping cannot be confirmed, no overlapping worker is started.
+
+Plugin card artwork: Vincent van Gogh, The Starry Night (1889), Museum of Modern Art. Public Domain reproduction from [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg).

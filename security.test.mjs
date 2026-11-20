@@ -12,3 +12,14 @@ test('retry cap, active-worker guard, next museum day',async()=>{const s=setup()
 test('manual retries share the hard daily cap',async()=>{const s=setup();await s.tick(true);await s.tick(true);await s.tick(true);await s.tick(true);assert.equal(s.count,3);assert.match(s.map.get('job').status,/Три попытки/)});
 test('failed spawn persists the attempt and does not retry every minute',async()=>{let attempts=0;const state=new Map();const tick=createScheduler({kv:{get:async k=>state.get(k),set:async(k,v)=>state.set(k,v)},store:{get:()=>({stale:true})},enabled:async()=>true,spawn:async()=>{attempts++;throw Error('provider failed')},getThread:async()=>({status:'idle'}),clock:()=>new Date('2026-11-19T10:00Z')});await tick();await tick();assert.equal(attempts,1);assert.equal(state.get('job').attempts,1);assert.match(state.get('job').status,/недоступен/)});
 test('verified image cache keeps only current and favorites',()=>{const db=new DatabaseSync(':memory:');let now=new Date('2026-11-19T10:00Z');const s=createArtStore(db,{clock:()=>now});const image=n=>({bytes:Buffer.from([255,216,n]),type:'image/jpeg',sha:'h'+n});s.publish(art(1),'h1',image(1));assert.equal(s.image('commons:1').bytes.length,3);s.rate({id:'commons:1',rating:5,favorite:true,traits:[]});now=new Date('2026-11-20T10:00Z');s.publish(art(2,'2026-11-20'),'h2',image(2));now=new Date('2026-11-21T10:00Z');s.publish(art(3,'2026-11-21'),'h3',image(3));assert.ok(s.image('commons:1'));assert.equal(s.image('commons:2'),null);assert.ok(s.image('commons:3'));s.rate({id:'commons:1',rating:5,favorite:false,traits:[]});assert.equal(s.image('commons:1'),null);db.close()});
+
+test('timed out worker must stop before retry; daily cap and unknown stop remain safe',async()=>{
+ let now=new Date('2026-11-20T08:00Z'),status='active',stops=0,spawns=0,confirm=false;
+ const map=new Map([['job',{day:'2026-11-20',at:now.getTime(),attempts:1,threadId:'old'}]]);
+ const tick=createScheduler({kv:{get:async k=>map.get(k),set:async(k,v)=>map.set(k,v)},store:{get:()=>({stale:true})},enabled:async()=>true,clock:()=>now,getThread:async()=>({status}),stopThread:async()=>{stops++;if(confirm)status='idle'},spawn:async()=>{assert.equal(status,'idle');spawns++;status='active';return {id:'new'}}});
+ now=new Date('2026-11-20T08:19Z');await tick(true);assert.equal(stops,0);
+ now=new Date('2026-11-20T08:20Z');await tick();assert.equal(stops,1);assert.equal(spawns,0);
+ confirm=true;await tick();assert.equal(spawns,1);assert.equal(map.get('job').attempts,2);
+ now=new Date('2026-11-20T08:40Z');await tick();assert.equal(spawns,2);
+ now=new Date('2026-11-20T09:00Z');await tick();assert.equal(spawns,2);assert.match(map.get('job').status,/Три попытки/);
+});

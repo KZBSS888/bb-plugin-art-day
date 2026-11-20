@@ -17,6 +17,7 @@ export default async function plugin(bb:BbPluginApi){
   return JSON.parse(Buffer.concat(chunks).toString('utf8'));
  }
  const tick=createScheduler({kv:bb.storage.kv,store,enabled:async()=>(await settings.get()).enabled,
+  stopThread:async(id:string)=>{await bb.sdk.threads.stop({threadId:id})},
   getThread:async(id:string)=>bb.sdk.threads.get({threadId:id}),
   spawn:async(day:string)=>{
    const personal=(await bb.sdk.projects.list({includePersonal:true})).find(p=>p.kind==='personal');
