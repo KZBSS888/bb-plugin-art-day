@@ -13,7 +13,7 @@ use `$BB_SERVER_URL/api/v1/plugins/art-day/http/picture-day`.
 Read `/brief`, not the entire gallery, for bounded recent taste context.
 Check `/seen?id=...&artist=...&title=...` for each shortlisted candidate.
 The museum day begins at 09:00 Europe/Paris, accounting for daylight saving.
-If `/brief` says `stale:false`, stop without changing today's painting.
+If `/brief` says `stale:false`, do not select another painting. Repair missing translations only, then stop.
 
 Freshly search every day. Use weighted randomness among fresh candidates,
 considering ratings 1–5, favorites, and explicitly selected traits. Do not infer
@@ -21,7 +21,8 @@ firm taste from one rating. Preserve some exploration without a fixed quota.
 Do not reuse unseen search results from previous runs or repeat shown works.
 View the actual image and verify attribution, museum, source page and rights.
 Only Public Domain/CC0 reproductions qualify. Use a verified Commons file and credit its Commons source page.
-Write a Russian story of 70–120 words and a detail of 25–45 words.
+Write a Russian source story of 70–120 words and a detail of 25–45 words, then prepare the English translation. The BB gallery follows system/browser language: ru-* uses Russian, all other locales use English.
+Read `/translation-work` for up to five retained cards missing English. POST `/translate` with id, language (en), title, story, detail, museum and medium. Repeat until empty, up to 20 cards per run. Translate only existing facts; do not change identity, date, artist, source, ratings or favorites. Missing translations show the original text with an explicit notice. Translations are pruned when a full card is no longer retained.
 Never invent factual claims, provenance, quotes or nonexistent APIs.
 If one image fails, search for another; if all fail, preserve the previous date.
 

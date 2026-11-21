@@ -1,6 +1,6 @@
 {
   "name": "bb-plugin-art-day",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "type": "module",
   "engines": {
     "bb": ">=0.6.157",
@@ -8,7 +8,7 @@
   },
   "bb": {
     "name": "Art Day",
-    "description": "Discover one museum painting every day and develop your taste in art. Explore short Russian stories, rate paintings and save favorites to guide future selections. Fresh research uses only Wikimedia Commons, with automatic selection from 09:00 Europe/Paris. Requires BB 0.6.157+, internet and your configured BB agent; its usage limits apply, with no separate login or API key.",
+    "description": "Discover a daily museum painting, read its story in Russian or English based on your system language, and shape selections with ratings.",
     "branding": {
       "icon": "./art-day.svg",
       "logo": {
@@ -48,7 +48,9 @@
     "PLUGIN_OVERVIEW.md",
     "LICENSE",
     "dist",
-    "starry-night.png"
+    "starry-night.png",
+    "i18n.mjs",
+    "localization.mjs"
   ],
   "scripts": {
     "test": "node --test *.test.mjs",

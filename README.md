@@ -1,6 +1,6 @@
 # Картина дня / Art Day
 
-A personal museum painting every day, inside BB. Russian editorial text.
+A personal museum painting every day, inside BB. Russian and English interface and stories, selected from your system/browser language (ru-* → Russian; all other locales → English).
 
 ## Install
 
@@ -53,3 +53,6 @@ bounded daily research workflow. No install or postinstall scripts are used.
 A selection attempt is limited to 20 minutes. A timed-out worker must be confirmed stopped before an immediate retry; the three-attempt daily limit still applies. If stopping cannot be confirmed, no overlapping worker is started.
 
 Plugin card artwork: Vincent van Gogh, The Starry Night (1889), Museum of Modern Art. Public Domain reproduction from [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg).
+
+## Language
+The gallery reads navigator.language and listens for languagechange. Daily agent tasks prepare the Russian source and English translation of retained cards. Existing cards are translated without replacing the painting. Missing translations show the source text with a notice. Translations use the configured BB agent and share the daily task budget; no translation API or key is required. Only current and favorite cards retain translations.
