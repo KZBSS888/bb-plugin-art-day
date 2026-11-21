@@ -23,3 +23,5 @@ test('timed out worker must stop before retry; daily cap and unknown stop remain
  now=new Date('2026-11-20T08:40Z');await tick();assert.equal(spawns,2);
  now=new Date('2026-11-20T09:00Z');await tick();assert.equal(spawns,2);assert.match(map.get('job').status,/Три попытки/);
 });
+
+test('Commons-only policy rejects Google cards and image provenance',()=>{for(const patch of [{source:'Google Arts & Culture',sourceUrl:'https://artsandculture.google.com/asset/test'},{imageSourceUrl:'https://artsandculture.google.com/asset/test'},{imageSource:'Google Arts & Culture'}])assert.throws(()=>validateArtwork({...art(1),...patch}));validateArtwork(art(1));});

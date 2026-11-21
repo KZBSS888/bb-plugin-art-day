@@ -17,8 +17,7 @@ BB's local/trusted-client boundary, not a new multi-user authentication system.
 Mutations require JSON under BB's route policy; bodies are streamed with a
 32 KiB cap. No `auth:none`, permissive CORS or external write token is added.
 
-New cards permit only the exact source hosts artsandculture.google.com and
-commons.wikimedia.org. Images permit only upload.wikimedia.org and
+New cards permit only the exact source host commons.wikimedia.org. Images permit only upload.wikimedia.org and
 thumb.wikimedia.org over HTTPS on the default port without URL credentials.
 Every redirect is revalidated (maximum four hops). Downloads are bounded to
 8 MiB with 15-second per-request timeouts, supported raster MIME types and

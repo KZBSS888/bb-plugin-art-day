@@ -15,9 +15,7 @@ Agent use counts toward your existing provider subscription or usage limits.
 Installation enables the built-in scheduler automatically. The plugin checks
 once a minute; the museum day begins at 09:00 Europe/Paris, including DST.
 BB must be running. After downtime it catches up; it cannot wake a closed app.
-A stable daily card is selected from a fresh search of **Google Arts & Culture
-and Wikimedia Commons only**. Google research is performed by the BB agent,
-not through an invented Google API. Image bytes come only from Wikimedia.
+A stable daily card is selected from a fresh search of **Wikimedia Commons only**. Research uses the Commons website or public API. Image bytes come only from Wikimedia.
 
 Rate paintings 1–5, mark favorites and select traits. The daily agent receives
 a compact preference summary and weights fresh candidates toward your taste,
